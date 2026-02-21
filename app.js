@@ -1,1 +1,5 @@
-console.log("Hello from Node + GitHub flow");
+function myFunction() {
+  return "Hello from my module";
+}
+
+module.exports = { myFunction };
