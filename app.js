@@ -1,15 +1,28 @@
 const http = require('http');
 const https = require('https');
-// write file
 const fs = require('fs');
+
+// Promise example
+const condition = true;
+
+const myPromise = new Promise((resolve, reject) => {
+  if (condition) resolve('Success!');
+  else reject('Failure!');
+});
+
+myPromise
+  .then((result) => console.log(result))
+  .catch((error) => console.log(error));
+
+// Write file
 fs.writeFile('file.txt', 'Hello World!', function (err) {
- if (err) throw err;
- console.log('File saved!');
+  if (err) throw err;
+  console.log('File saved!');
 });
 
 // Web server
 http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.writeHead(200, { 'Content-Type': 'text/html' });
   res.write('Hello World!');
   res.end();
 }).listen(8080);
