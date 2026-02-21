@@ -2,7 +2,21 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs');
 
-// Promise example
+// ---------- Async/Await Example ----------
+const asyncPromise = Promise.resolve("Success!");
+
+async function asyncExample() {
+  try {
+    const result = await asyncPromise;
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+asyncExample();
+
+// ---------- Promise Example ----------
 const condition = true;
 
 const myPromise = new Promise((resolve, reject) => {
@@ -14,25 +28,25 @@ myPromise
   .then((result) => console.log(result))
   .catch((error) => console.log(error));
 
-// Write file
+// ---------- Write File ----------
 fs.writeFile('file.txt', 'Hello World!', function (err) {
   if (err) throw err;
   console.log('File saved!');
 });
 
-// Web server
+// ---------- Web Server ----------
 http.createServer(function (req, res) {
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.write('Hello World!');
   res.end();
 }).listen(8080);
 
-// Module function
-function myFunction() {
+// ---------- Module Function ----------
+function myModuleFunction() {
   return "Hello from my module";
 }
 
-// HTTPS API request
+// ---------- HTTPS API Request ----------
 https.get('https://jsonplaceholder.typicode.com/posts/1', (resp) => {
   let data = '';
 
@@ -48,4 +62,4 @@ https.get('https://jsonplaceholder.typicode.com/posts/1', (resp) => {
   console.log("Error: " + err.message);
 });
 
-module.exports = { myFunction };
+module.exports = { myModuleFunction };
