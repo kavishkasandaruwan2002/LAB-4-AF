@@ -41,11 +41,30 @@ fs.writeFile('file.txt', 'Hello World!', function (err) {
 });
 
 // ---------- Web Server ----------
-http.createServer(function (req, res) {
+// ---------- Web Server ----------
+const PORT = Number(process.env.PORT) || 8080;
+const server = http.createServer(function (req, res) {
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.write('Hello World!');
   res.end();
-}).listen(8080);
+});
+
+function startServer(port) {
+  server.listen(port, () => console.log(`Server listening on port ${port}`));
+}
+
+server.on('error', (err) => {
+  if (err && err.code === 'EADDRINUSE') {
+    const altPort = PORT + 1;
+    console.error(`Port ${PORT} in use. Attempting ${altPort}...`);
+    server.listen(altPort);
+  } else {
+    console.error('Server error:', err);
+    process.exit(1);
+  }
+});
+
+startServer(PORT);
 
 // ---------- Module Function ----------
 function myModuleFunction() {
